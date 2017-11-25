@@ -30,7 +30,7 @@ local scorePlaceholder = 0
 
 local GamePlayScene = class("GamePlayScene",function()
     local scene = cc.Scene:createWithPhysics()
-    --scene:getPhysicsWorld():setDebugDrawMask(cc.PhysicsWorld.DEBUGDRAW_ALL)
+    scene:getPhysicsWorld():setDebugDrawMask(cc.PhysicsWorld.DEBUGDRAW_ALL)
     --0,0不受到重力的影响
     scene:getPhysicsWorld():setGravity(cc.p(0,0))
 
