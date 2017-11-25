@@ -5,6 +5,10 @@ function Tank:ctor(node, name)
 	Tank.super.ctor(self, node)
 	self.node = node
 
+	self.dx = 0
+	self.dy = 0
+	self.speed = 100
+
 	-- -- 临时代码
 	-- local size = cc.Director:getInstance():getWinSize()
 	-- self.sp:setPosition(size.width/2,size.height/2)
@@ -21,25 +25,41 @@ function Tank:ctor(node, name)
 
 end
 
+function Tank:Update()
+	self:UpdatePosition(function (nextPosX,nextPosY)
+		-- body
+	end)
+end
+
 function Tank:SetDir(dir)
 	printLog("测试:", dir)
 	if dir == nil then
+		self.dx = 0
+		self.dy = 0
 		self.spAnim:Stop("run")
 		return 
 	elseif dir == "left"
 		then
+		self.dx = -self.speed
+		self.dy = 0
 		self.sp:setRotation(-90)
 		self.spAnim:Play("run")
 	elseif dir == "right"
 		then
+		self.dx = self.speed
+		self.dy = 0
 		self.sp:setRotation(90)
 		self.spAnim:Play("run")
 	elseif dir == "up"
 		then
+		self.dx = 0
+		self.dy = self.speed
 		self.sp:setRotation(0)
 		self.spAnim:Play("run")
 	elseif dir == "down"
 		then
+		self.dx = 0
+		self.dy = -self.speed
 		self.sp:setRotation(180)
 		self.spAnim:Play("run")
 	end
@@ -50,6 +70,7 @@ end
 
 -- 坦克
 function Tank:Destroy()
+	self.spAnim:Destroy()
 	Tank.super.Destroy(self)
 end
 
