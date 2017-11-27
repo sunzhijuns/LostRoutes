@@ -1,3 +1,5 @@
+require("app.Common")
+local Map = require("app.Map")
 local Tank = require("app.Tank")
 local PlayerTank = require("app.PlayerTank")
 local MainScene = class("MainScene", cc.load("mvc").ViewBase)
@@ -23,9 +25,10 @@ function MainScene:onEnter()
         -- display.newSprite("tex.png")
         -- :move(display.center)
         -- :addTo(self)
+        self.map = Map.new(self)
         local size = cc.Director:getInstance():getWinSize()
-        self.tank = PlayerTank.new(self,"tank_green")
-        self.tank.sp:setPosition(size.width/2, size.height/2)
+        self.tank = PlayerTank.new(self,"tank_green", self.map)
+        self.tank:SetPos(5, 5)
 
         self:ProcessInput()
 end

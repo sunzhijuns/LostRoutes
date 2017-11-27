@@ -33,8 +33,11 @@ function printLog(tag, fmt, ...)
 end
 
 function printError(fmt, ...)
-    printLog("ERR", fmt, ...)
-    print(debug.traceback("", 2))
+    print("----------------------------------------")
+    print("LUA ERROR: \n")
+    print(debug.traceback())
+    cclog("----------------------------------------")
+    printLog("ERROR", fmt, ...)
 end
 
 function printInfo(fmt, ...)

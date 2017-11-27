@@ -69,7 +69,7 @@ function Block:updateImage()
 	local spriteFrameCache = cc.SpriteFrameCache:getInstance()
 	local spriteName
 	if self.breakable then
-		spriteName = string.format("%s%d", self.type, MaxBreakableStep - self.hp)
+		spriteName = string.format("%s%d.png", self.type, MaxBreakableStep - self.hp)
 	else
 		spriteName = string.format("%s.png", self.type)
 	end
