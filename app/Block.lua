@@ -7,42 +7,42 @@ local blockPropertyTable = {
 	-- 泥土地
 	["mud"] = {
 		["hp"] = 0,
-		["needAp"] = false, -- 是否需要穿甲弹
+		["needAP"] = false, -- 是否需要穿甲弹
 		["damping"] = 0.2, -- 阻尼
 		["breakable"] = false, -- 可否破坏
 	},
 	-- 路面
 	["road"] = {
 		["hp"] = 0,
-		["needAp"] = false, -- 是否需要穿甲弹
+		["needAP"] = false, -- 是否需要穿甲弹
 		["damping"] = 0, -- 阻尼
 		["breakable"] = false, -- 可否破坏
 	},
 	-- 草
 	["grass"] = {
 		["hp"] = 0,
-		["needAp"] = false, -- 是否需要穿甲弹
+		["needAP"] = false, -- 是否需要穿甲弹
 		["damping"] = 0, -- 阻尼
 		["breakable"] = false, -- 可否破坏
 	},
 	-- 水
 	["water"] = {
 		["hp"] = 0,
-		["needAp"] = false, -- 是否需要穿甲弹
+		["needAP"] = false, -- 是否需要穿甲弹
 		["damping"] = 1, -- 阻尼
 		["breakable"] = false, -- 可否破坏
 	},
 	-- 砖块
 	["brick"] = {
 		["hp"] = MaxBreakableStep,
-		["needAp"] = false, -- 是否需要穿甲弹
+		["needAP"] = false, -- 是否需要穿甲弹
 		["damping"] = 1, -- 阻尼
 		["breakable"] = true, -- 可否破坏
 	},
 	-- 钢铁
 	["steel"] = {
 		["hp"] = MaxBreakableStep,
-		["needAp"] = true, -- 是否需要穿甲弹
+		["needAP"] = true, -- 是否需要穿甲弹
 		["damping"] = 1, -- 阻尼
 		["breakable"] = true, -- 可否破坏
 	},

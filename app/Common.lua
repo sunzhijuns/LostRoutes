@@ -12,6 +12,9 @@ function GetIntPart( x )
 	-- if x<=0 then
 	-- 	return math.ceil(x)
 	-- end
+	-- if math.ceil(x) == x then
+	-- 	return x
+	-- end
 	return math.floor(x)
 end
 
@@ -106,3 +109,7 @@ end
 function RectHit(r,x,y )
 	return x>=r.left and x<= r.right and y >=r.bottom and y <= r.top 
 end
+
+
+
+editorFileName = "editor.lua"

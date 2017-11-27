@@ -1,6 +1,8 @@
 require("app.Common")
+require("app.Camp")
 local Object = class("Object")
-function Object:ctor(node)
+function Object:ctor(node,camp)
+	Camp_Add(camp, self)
 	self.sp = cc.Sprite:create()
 	self.node = node
 	self.node:addChild(self.sp)
@@ -14,6 +16,12 @@ end
 function Object:GetRect( )
 	return NewRect(self.sp:getPositionX(), self.sp:getPositionY())
 end
+
+function Object:Stop()
+	self.dx = 0
+	self.dy = 0
+end
+
 function Object:Alive()
 	return self.sp ~= nil
 end
@@ -43,10 +51,36 @@ function Object:GetPos()
 end
 
 function Object:Destroy()
+	Camp_Remove(self)
 	if self.updateFuncID then
-		cc.Director:getInstance():getScheduler():unscheduleScriptFunc(self.updateFuncID)
+		cc.Director:getInstance():getScheduler():unscheduleScriptEntry(self.updateFuncID)
 	end
 	self.node:removeChild(self.sp)
 	self.sp = nil
 end
+
+function Object:CheckHit( posx,posy )
+	return Camp_IterateHostile(self.camp, function ( obj )
+		local tgrect = obj:GetRect()
+		if RectHit(tgrect,posx,posy) then
+			return obj
+		end
+	end)
+end
+
+function Object:CheckCollide( posx, posy,ex )
+	local selfrect = NewRect(posx, posy, ex)
+	return Camp_IterateAll(function ( obj )
+		if obj == self then
+			return false
+
+		end
+		local tgrect = obj:GetRect()
+		if RectIntersect(selfrect, tgrect)~= nil
+		 then
+			return obj
+		end
+	end)
+end
+
 return Object

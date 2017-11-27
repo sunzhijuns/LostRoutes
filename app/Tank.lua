@@ -1,13 +1,16 @@
 local Object = require("app.Object")
 local SpriteAnim = require("app.SpriteAnim")
 local Tank = class("Tank", Object)
-function Tank:ctor(node, name, map)
-	Tank.super.ctor(self, node)
+local Bullet = require("app.Bullet")
+function Tank:ctor(node, name, map,camp)
+	Tank.super.ctor(self, node,camp)
 	self.node = node
 	self.map = map
 	self.dx = 0
 	self.dy = 0
 	self.speed = 100
+
+	self.OnCollide = nil
 
 	-- -- 临时代码
 	-- local size = cc.Director:getInstance():getWinSize()
@@ -29,6 +32,12 @@ function Tank:Update()
 	self:UpdatePosition(function (nextPosX,nextPosY)
 		local hit
 		hit = self.map:Collide(nextPosX, nextPosY, -5)
+		if hit==nil then
+			hit=self:CheckHit(nextPosX, nextPosY)
+		end
+		if hit and self.OnCollide then
+			self.OnCollide(hit)
+		end
 		return hit
 	end)
 end
@@ -74,6 +83,13 @@ end
 function Tank:Destroy()
 	self.spAnim:Destroy()
 	Tank.super.Destroy(self)
+end
+
+function Tank:Fire(  )
+	if self.bullet~=nil and self.bullet:Alive() then
+		return
+	end
+	self.bullet = Bullet.new(self.node, self.map , 0, self, self.dir)
 end
 
 return Tank

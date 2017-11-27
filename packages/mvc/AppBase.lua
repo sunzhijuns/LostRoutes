@@ -45,6 +45,7 @@ end
 function AppBase:createView(name)
     for _, root in ipairs(self.configs_.viewsRoot) do
         local packageName = string.format("%s.%s", root, name)
+        -- printLog("tag", packageName)
         local status, view = xpcall(function()
                 return require(packageName)
             end, function(msg)

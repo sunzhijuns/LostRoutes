@@ -77,7 +77,7 @@ function SpriteAnim:Play(name, callback)
 					setFrame(self.sp, def, def.currFrame)
 				elseif def.once then
 					def.running = false
-					cc.Director:getInstance():getScheduler():unscheduleScriptFunc(def.shid)
+					cc.Director:getInstance():getScheduler():unscheduleScriptEntry(def.shid)
 					def.shid = nil
 					if callback ~= nil then
 						callback()
@@ -100,7 +100,7 @@ end
 function SpriteAnim:Destroy()
 	for name,def in pairs(self.anim) do
 		if def.shid then
-			cc.Director:getInstance():getScheduler():unscheduleScirptFunc(def.shid)
+			cc.Director:getInstance():getScheduler():unscheduleScriptEntry(def.shid)
 		end
 	end
 	self.sp = nil
